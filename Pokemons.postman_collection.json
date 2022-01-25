@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "0d1e421a-c511-43d9-82ea-54b70e421f29",
+		"name": "Pokemons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/pikachu",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"pikachu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/Caterpie",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"Caterpie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Insert Pokemon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Fire\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/CaterpieMega",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"CaterpieMega"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Insert Pokemon Error Already Exists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Fire\",\n    \"Type 2\": \"Air\",\n    \"HP\": \"150\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/Bulbasaur",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"Bulbasaur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update Pokemon",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Water\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/CaterpieMega",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"CaterpieMega"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update Pokemon Error",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Water\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/IDontExist",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"IDontExist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Pokemon",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Water\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/IDontExist",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"IDontExist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Pokemon Success",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Type 1\": \"Water\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/index.php/rest/pokemons/CaterpieMega",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"index.php",
+						"rest",
+						"pokemons",
+						"CaterpieMega"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

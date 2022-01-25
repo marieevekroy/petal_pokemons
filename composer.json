@@ -1,0 +1,8 @@
+{
+  "require": {
+    "zircote/swagger-php": "^3.0"
+  },
+  "autoload": {
+    "classmap": ["Model","Controller"]
+  }
+}

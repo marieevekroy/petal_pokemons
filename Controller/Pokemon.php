@@ -89,7 +89,7 @@ class Pokemon
 
         $this->sendOutput(
             json_encode($pokemons),
-            ["HTTP/1.1 200 OK"]
+            ["HTTP/1.1 200 OK","Access-Control-Allow-Methods: GET"]
         );
     }
 
@@ -106,7 +106,7 @@ class Pokemon
 
         $this->sendOutput(
             json_encode($pokemon),
-            ["HTTP/1.1 200 OK"]
+            ["HTTP/1.1 200 OK","Access-Control-Allow-Methods: GET"]
         );
     }
 
@@ -123,7 +123,7 @@ class Pokemon
 
         $this->sendOutput(
             json_encode($pokemon),
-            ["HTTP/1.1 200 OK"]
+            ["HTTP/1.1 200 OK","Access-Control-Allow-Methods: GET"]
         );
     }
 
@@ -157,7 +157,7 @@ class Pokemon
         $this->pokemonModel->insert($body);
         $this->sendOutput(
             json_encode("Success"),
-            ["HTTP/1.1 201 Created"]
+            ["HTTP/1.1 201 Created","Access-Control-Allow-Methods: POST"]
         );
     }
 
@@ -179,7 +179,7 @@ class Pokemon
 
         $this->sendOutput(
             json_encode("Success"),
-            ["HTTP/1.1 200 OK"]
+            ["HTTP/1.1 200 OK","Access-Control-Allow-Methods: PUT"]
         );
     }
 
@@ -196,14 +196,15 @@ class Pokemon
         $this->pokemonModel->deleteByName($this->pokemonName);
         $this->sendOutput(
             json_encode("Success"),
-            ["HTTP/1.1 200 OK"]
+            ["HTTP/1.1 200 OK","Access-Control-Allow-Methods: DELETE"]
         );
     }
 
     private function sendOutput($data, $headers): void
     {
         // Define headers
-        header('Content-Type: application/json');
+        header('Content-Type: application/json; charset=UTF-8');
+        header('Access-Control-Allow-Origin: *');
         foreach ($headers as $header) {
             header($header);
         }

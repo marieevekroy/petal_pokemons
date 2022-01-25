@@ -19,7 +19,7 @@ With Curl or Postman, test those calls
 
 ## (Many) Possible improvements 
 To make sure this is a professional project, I would add those elements :
-- Proper REST APIs need OAuth!!!
+- Proper REST APIs need Authentication!!! If I had more time we could add a Bearer token or OAuth
 - As many calls can happen at the same time, to ensure stability of the application, do one of the following :
   - Add a .lock file system to actually lock the csv file while editing it to prevent conflicts
   - Add a messaging queue system like RabbitMQ

@@ -2,6 +2,7 @@ version: "1.0"
 services:
   web:
     image: nginx:1.21.5
+    container_name: pokemons-web
     ports:
       - "8080:80"
     volumes:
@@ -11,5 +12,6 @@ services:
       - php
   php:
     build: .
+    container_name: pokemons-php
     volumes:
       - .:/var/www/html

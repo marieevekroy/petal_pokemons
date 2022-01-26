@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Model;
 
-use Model\PokemonResourceModel;
-
 class Pokemon
 {
     public int $id;

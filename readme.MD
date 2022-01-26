@@ -25,6 +25,7 @@ To make sure this is a professional project, I would add those elements :
 - Validate input types for every single field (make sure HP is integer for example). Easier to do with a real database but pretty long to implement with a csv file
 - Nice to have Swagger or ReDoc documentation so the client can easily expects what calls he can do, what parameters to send and what kind of responses he could have
 - Permissions : Some users could access only GET but no POST/PUT/DELETE
+- Add logs
 
 ## Coding Standards
 - Code follows PSR12 coding standards

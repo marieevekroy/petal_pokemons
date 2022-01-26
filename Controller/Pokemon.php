@@ -103,7 +103,7 @@ class Pokemon
         );
     }
 
-    private function getById()
+    private function getById(): void
     {
         $pokemon = $this->pokemonModel->getById($this->pokemonId);
 
@@ -120,7 +120,7 @@ class Pokemon
         );
     }
 
-    private function getByName()
+    private function getByName(): void
     {
         $pokemon = $this->pokemonModel->getByName($this->pokemonName);
 
@@ -137,7 +137,7 @@ class Pokemon
         );
     }
 
-    private function createPokemon()
+    private function createPokemon(): void
     {
         // Validate the entity is not already created
         if ($this->pokemonModel->getByName($this->pokemonName)) {
@@ -171,7 +171,7 @@ class Pokemon
         );
     }
 
-    private function updatePokemon()
+    private function updatePokemon(): void
     {
         // Validate the entity is not already created
         $existingPokemon = $this->pokemonModel->getByName($this->pokemonName);
@@ -193,7 +193,7 @@ class Pokemon
         );
     }
 
-    private function deletePokemon()
+    private function deletePokemon(): void
     {
         // Validate entity exists
         if (!$this->pokemonModel->getByName($this->pokemonName)) {
@@ -210,7 +210,7 @@ class Pokemon
         );
     }
 
-    private function sendOutput($data, $headers): void
+    private function sendOutput(string $data, array $headers): void
     {
         // Define headers
         header('Content-Type: application/json; charset=UTF-8');

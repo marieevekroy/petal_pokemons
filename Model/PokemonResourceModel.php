@@ -24,7 +24,7 @@ class PokemonResourceModel
         $this->incrementId = $this->getIncrementId();
     }
 
-    public function getAll($limit, $page)
+    public function getAll(int $limit, int $page): array
     {
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
             throw new \ErrorException("Invalid filename");
@@ -50,7 +50,7 @@ class PokemonResourceModel
 
     // Pokemon id is NOT unique
     // can return multiple results
-    public function getById(int $id)
+    public function getById(int $id): array
     {
         // mode read
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
@@ -72,7 +72,7 @@ class PokemonResourceModel
     }
 
     // Pokemon name is unique and returns only one result
-    public function getByName(string $name)
+    public function getByName(string $name): array
     {
         // mode read
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
@@ -92,7 +92,7 @@ class PokemonResourceModel
         return $pokemon;
     }
 
-    public function insert($data)
+    public function insert(array $data): void
     {
         // mode append, insert at end of file
         if (!($fopen = fopen("csv/" . $this->filename, "a"))) {
@@ -105,7 +105,7 @@ class PokemonResourceModel
 
     // impossible to update a single csv line
     // rebuild csv data
-    public function update($pokemon)
+    public function update(array $pokemon): void
     {
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
             throw new \ErrorException("Invalid filename or wrong permissions");
@@ -135,7 +135,7 @@ class PokemonResourceModel
 
     // cannot modify middle of a csv file
     // rebuild csv data
-    public function deleteByName($name)
+    public function deleteByName(string $name): void
     {
         if (!($fopen = fopen("csv/" . $this->filename, "rw"))) {
             throw new \ErrorException("Invalid filename or not writable file");
@@ -174,9 +174,11 @@ class PokemonResourceModel
                 return $data;
             }
         }
+
+        return[];
     }
 
-    private function getIncrementId()
+    private function getIncrementId(): int
     {
         $maxId = 0;
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {

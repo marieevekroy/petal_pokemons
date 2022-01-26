@@ -27,22 +27,25 @@ class Pokemon
     public function getAll($limit = 10, $page = 0): array
     {
         $data = $this->resourceModel->getAll($limit, $page);
+
         return $data;
     }
 
     public function getById(int $id): array
     {
         $data = $this->resourceModel->getById($id);
+
         return $data;
     }
 
     public function getByName(string $name): array
     {
         $data = $this->resourceModel->getByName($name);
+
         return $data;
     }
 
-    public function insert($data)
+    public function insert(array $data): void
     {
         if (!is_numeric($data["#"])) {
             $data["#"] = $this->resourceModel->incrementId;
@@ -52,18 +55,18 @@ class Pokemon
         $this->resourceModel->insert($formattedData);
     }
 
-    public function update($data)
+    public function update(array $data): void
     {
         $formattedData = $this->reformatData($data);
         $this->resourceModel->update($formattedData);
     }
 
-    public function deleteByName($name): void
+    public function deleteByName(string $name): void
     {
         $this->resourceModel->deleteByName($name);
     }
 
-    private function reformatData($data): array
+    private function reformatData(array $data): array
     {
         $formattedData = [];
         $fields = $this->resourceModel->getHeaders();
@@ -81,6 +84,7 @@ class Pokemon
                 $formattedData[$field] = null;
             }
         }
+
         return $formattedData;
     }
 }

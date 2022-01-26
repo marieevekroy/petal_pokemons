@@ -1,17 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Usually Resource Models only purpose is to interact with the database
  * In our case, it will only read/write in our csv file
  */
 
+declare(strict_types=1);
+
 namespace Model;
 
 class PokemonResourceModel
 {
-
     private string $filename;
 
     public array $csvHeaders;
@@ -32,7 +31,7 @@ class PokemonResourceModel
         }
         $pokemons = [];
         $line = 0;
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             if (is_numeric($data[0])) {
                 if ($line >= ($page * $limit) && $line < (($page + 1) * $limit)) {
                     $singlepokemon = [];
@@ -57,17 +56,19 @@ class PokemonResourceModel
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
             throw new \ErrorException("Invalid filename");
         }
-        $pokemon = [];
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        $pokemons = [];
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
+            $pokemon = [];
             if ($data[0] == $id) {
                 foreach ($data as $index => $value) {
                     $pokemon[$this->csvHeaders[$index]] = $value;
                 }
+                $pokemons[] = $pokemon;
             }
         }
         fclose($fopen);
 
-        return $pokemon;
+        return $pokemons;
     }
 
     // Pokemon name is unique and returns only one result
@@ -78,7 +79,7 @@ class PokemonResourceModel
             throw new \ErrorException("Invalid filename");
         }
         $pokemon = [];
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             if ($data[1] == $name) {
                 foreach ($data as $index => $value) {
                     $pokemon[$this->csvHeaders[$index]] = $value;
@@ -93,7 +94,7 @@ class PokemonResourceModel
 
     public function insert($data)
     {
-        // mode append
+        // mode append, insert at end of file
         if (!($fopen = fopen("csv/" . $this->filename, "a"))) {
             throw new \ErrorException("Invalid filename or not writable file");
         }
@@ -111,7 +112,7 @@ class PokemonResourceModel
         }
 
         $allData = [];
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             $newData = [];
             foreach ($data as $index => $value) {
                 if ($data[1] == $pokemon["Name"]) {
@@ -141,7 +142,7 @@ class PokemonResourceModel
         }
 
         $allData = [];
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             $newData = [];
             foreach ($data as $index => $value) {
                 if ($data[1] == $name) {
@@ -168,25 +169,26 @@ class PokemonResourceModel
             throw new \ErrorException("Invalid filename");
         }
 
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             if (!is_numeric($data[0])) {
                 return $data;
             }
         }
     }
 
-    private function getIncrementId(){
+    private function getIncrementId()
+    {
         $maxId = 0;
         if (!($fopen = fopen("csv/" . $this->filename, "r"))) {
             throw new \ErrorException("Invalid filename");
         }
 
-        while (($data = fgetcsv($fopen, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($fopen, 1000, ",")) !== false) {
             if (is_numeric($data[0]) && $data[0] > $maxId) {
                 $maxId = $data[0];
             }
         }
 
-        return $maxId+1;
+        return $maxId + 1;
     }
 }

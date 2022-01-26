@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Controller;
 
-use \Model\Pokemon as PokemonModel;
+use Model\Pokemon as PokemonModel;
 
 class Pokemon
 {
-
     private string $requestMethod;
 
     private ?int $pokemonId;
@@ -30,7 +29,18 @@ class Pokemon
             if (is_numeric($pokemonIdParam)) {
                 $this->pokemonId = intval($pokemonIdParam);
             } else {
-                $this->pokemonName = addslashes(strip_tags($pokemonIdParam));
+                $pokemonIdParam = filter_var(
+                    $pokemonIdParam,
+                    FILTER_VALIDATE_REGEXP,
+                    array("options" => array("regexp" => "/^[a-z]+$/i"))
+                );
+                if (!$pokemonIdParam) {
+                    $this->sendOutput(
+                        json_encode("Invalid output"),
+                        ["HTTP/1.1 400 Bad Request"]
+                    );
+                }
+                $this->pokemonName = $pokemonIdParam;
             }
         }
     }
@@ -42,7 +52,7 @@ class Pokemon
             case 'GET':
                 if (isset($this->pokemonId)) {
                     $this->getById();
-                } else if (isset($this->pokemonName)) {
+                } elseif (isset($this->pokemonName)) {
                     $this->getByName();
                 } else {
                     $this->list();
@@ -82,8 +92,8 @@ class Pokemon
     {
         // Default values will be 10 per page
         parse_str($_SERVER['QUERY_STRING'], $params);
-        $limit = isset($params['limit'])?intval($params['limit']):10;
-        $page = isset($params['page'])?intval($params['page']):0;
+        $limit = isset($params['limit']) ? intval($params['limit']) : 10;
+        $page = isset($params['page']) ? intval($params['page']) : 0;
 
         $pokemons = $this->pokemonModel->getAll($limit, $page);
 
@@ -137,7 +147,7 @@ class Pokemon
             );
         }
 
-        $body = (array)json_decode(file_get_contents('php://input'), TRUE);
+        $body = (array)json_decode(file_get_contents('php://input'), true);
         $body["Name"] = $this->pokemonName;
 
         // Validate the base name of the Pokemon (without evolution)
@@ -172,7 +182,7 @@ class Pokemon
             );
         }
 
-        $body = (array)json_decode(file_get_contents('php://input'), TRUE);
+        $body = (array)json_decode(file_get_contents('php://input'), true);
         $body["Name"] = $this->pokemonName;
         $body = array_merge($existingPokemon, $body);
         $this->pokemonModel->update($body);

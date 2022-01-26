@@ -16,7 +16,7 @@ With Curl or Postman, test those calls
   - POST http://0.0.0.0:8080/index.php/rest/pokemons
   - PUT http://0.0.0.0:8080/index.php/rest/pokemons/{name}
   - DELETE http://0.0.0.0:8080/index.php/rest/pokemons/{name}
-
+  
 ## (Many) Possible improvements 
 To make sure this is a professional project, I would add those elements :
 - Proper REST APIs need Authentication!!! If I had more time we could add a Bearer token or OAuth
@@ -26,3 +26,9 @@ To make sure this is a professional project, I would add those elements :
 - Validate input types for every single field (make sure HP is integer for example)
 - Nice to have Swagger or ReDoc documentation so the client can easily expects what calls he can do, what parameters to send and what kind of responses he could have
 - Permissions : Some users could access only GET but no POST/PUT/DELETE
+
+## Coding Standards
+- Code follows PSR12 coding standards
+- Verified with phpcs
+- `phpcs --standard=PSR12 Model`
+- `phpcs --standard=PSR12 Controller`
